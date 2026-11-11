@@ -1,0 +1,61 @@
+ItemID,ItemName,Category,UoM,ContractPrice
+I001,Item 01,Electronics,BOX,58.33
+I002,Item 02,IT Services,EA,458.43
+I003,Item 03,Electronics,EA,118.96
+I004,Item 04,Logistics,BOX,23.52
+I005,Item 05,Electronics,BOX,279.65
+I006,Item 06,Packaging,KG,188.61
+I007,Item 07,Logistics,KG,415.75
+I008,Item 08,IT Services,KG,405.08
+I009,Item 09,Packaging,KG,161.98
+I010,Item 10,Logistics,KG,476.69
+I011,Item 11,Packaging,EA,149.0
+I012,Item 12,Logistics,EA,259.95
+I013,Item 13,Logistics,EA,131.7
+I014,Item 14,Electronics,BOX,468.34
+I015,Item 15,Logistics,KG,86.48
+I016,Item 16,Packaging,KG,27.23
+I017,Item 17,Raw Materials,KG,220.37
+I018,Item 18,Raw Materials,BOX,496.23
+I019,Item 19,Electronics,EA,446.38
+I020,Item 20,IT Services,EA,375.56
+I021,Item 21,Raw Materials,EA,445.94
+I022,Item 22,Electronics,KG,447.26
+I023,Item 23,Logistics,BOX,261.83
+I024,Item 24,Packaging,KG,161.38
+I025,Item 25,Logistics,KG,387.15
+I026,Item 26,Packaging,BOX,332.52
+I027,Item 27,Logistics,EA,189.96
+I028,Item 28,MRO,KG,51.76
+I029,Item 29,MRO,KG,374.66
+I030,Item 30,Packaging,KG,134.92
+I031,Item 31,Electronics,BOX,468.72
+I032,Item 32,IT Services,EA,124.28
+I033,Item 33,Raw Materials,BOX,65.77
+I034,Item 34,Logistics,EA,416.4
+I035,Item 35,Electronics,KG,80.88
+I036,Item 36,Logistics,KG,93.74
+I037,Item 37,MRO,BOX,301.69
+I038,Item 38,Electronics,KG,437.91
+I039,Item 39,Packaging,EA,102.24
+I040,Item 40,MRO,EA,158.61
+I041,Item 41,Raw Materials,KG,389.82
+I042,Item 42,MRO,BOX,486.05
+I043,Item 43,Raw Materials,EA,252.87
+I044,Item 44,MRO,BOX,76.23
+I045,Item 45,MRO,KG,11.9
+I046,Item 46,Raw Materials,EA,118.68
+I047,Item 47,Logistics,EA,70.25
+I048,Item 48,Electronics,KG,340.44
+I049,Item 49,Logistics,EA,65.31
+I050,Item 50,Raw Materials,EA,255.63
+I051,Item 51,Packaging,KG,348.66
+I052,Item 52,Electronics,BOX,292.65
+I053,Item 53,Packaging,EA,103.89
+I054,Item 54,Packaging,EA,403.04
+I055,Item 55,MRO,EA,359.13
+I056,Item 56,Raw Materials,KG,370.8
+I057,Item 57,Logistics,BOX,69.87
+I058,Item 58,Raw Materials,BOX,66.26
+I059,Item 59,Packaging,BOX,464.14
+I060,Item 60,MRO,BOX,201.8

@@ -1,0 +1,78 @@
+-- Create a table called "_Measures" (Enter Data, one blank column, then hide the column)
+-- and put every measure below in it.
+
+-- ===== Core =====
+Total Spend = SUM ( FactPO[LineAmount] )
+
+PO Count = DISTINCTCOUNT ( FactPO[PO_ID] )
+
+-- ===== Delivery performance =====
+On-Time % =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( FactPO ), FactPO[DelayDays] <= 0 ),
+    COUNTROWS ( FactPO )
+)
+
+Average Lead Time = AVERAGE ( FactPO[LeadTimeDays] )      -- order -> actual delivery, days
+
+Average Delay Days = AVERAGE ( FactPO[DelayDays] )        -- actual - promised (negative = early)
+
+Average Delay (Late POs) =
+CALCULATE ( AVERAGE ( FactPO[DelayDays] ), FactPO[DelayDays] > 0 )
+
+-- ===== Trend =====
+Spend Prior Month =
+CALCULATE ( [Total Spend], DATEADD ( DimDate[Date], -1, MONTH ) )
+
+Spend MoM % =
+DIVIDE ( [Total Spend] - [Spend Prior Month], [Spend Prior Month] )
+
+-- ===== Price / contract compliance =====
+Contract Spend =
+SUMX ( FactPO, FactPO[Quantity] * RELATED ( DimItem[ContractPrice] ) )
+
+Price Variance vs Contract = [Total Spend] - [Contract Spend]     -- positive = overpaying
+
+Price Variance % = DIVIDE ( [Price Variance vs Contract], [Contract Spend] )
+
+Off-Contract PO Count =
+COUNTROWS (
+    FILTER ( FactPO, ABS ( FactPO[UnitPrice] - RELATED ( DimItem[ContractPrice] ) ) > 0.005 )
+)
+
+Off-Contract Spend % =
+DIVIDE (
+    SUMX (
+        FILTER ( FactPO, ABS ( FactPO[UnitPrice] - RELATED ( DimItem[ContractPrice] ) ) > 0.005 ),
+        FactPO[LineAmount]
+    ),
+    [Total Spend]
+)
+
+-- ===== Supplier concentration =====
+Top-5 Supplier Share =
+DIVIDE (
+    SUMX (
+        TOPN ( 5, ALLSELECTED ( DimSupplier[SupplierName] ), [Total Spend], DESC ),
+        [Total Spend]
+    ),
+    CALCULATE ( [Total Spend], ALLSELECTED ( DimSupplier ) )
+)
+
+Supplier Rank =
+RANKX ( ALLSELECTED ( DimSupplier[SupplierName] ), [Total Spend], , DESC, DENSE )
+
+-- ===== Data quality (table: DQ_Log) =====
+DQ Raw Rows = COUNTROWS ( DQ_Log )
+
+DQ Flagged Rows = CALCULATE ( COUNTROWS ( DQ_Log ), NOT ISBLANK ( DQ_Log[IssueReason] ) )
+
+DQ Flagged % = DIVIDE ( [DQ Flagged Rows], [DQ Raw Rows] )
+
+DQ Duplicate POs = SUM ( DQ_Log[IsDuplicate] )
+
+DQ Missing Supplier = SUM ( DQ_Log[IsMissingSupplier] )
+
+DQ Invalid Quantity = SUM ( DQ_Log[IsInvalidQty] )
+
+DQ Delivery Before Order = SUM ( DQ_Log[IsDateError] )

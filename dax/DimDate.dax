@@ -1,0 +1,14 @@
+-- Modeling > New table. Then: right-click table > Mark as date table > column [Date]
+-- Sort [Month] by [MonthNo].
+DimDate =
+ADDCOLUMNS (
+    CALENDAR (
+        DATE ( YEAR ( MIN ( FactPO[OrderDate] ) ), 1, 1 ),
+        DATE ( YEAR ( MAX ( FactPO[OrderDate] ) ), 12, 31 )
+    ),
+    "Year", YEAR ( [Date] ),
+    "Quarter", "Q" & QUARTER ( [Date] ),
+    "MonthNo", MONTH ( [Date] ),
+    "Month", FORMAT ( [Date], "MMM" ),
+    "YearMonth", FORMAT ( [Date], "YYYY-MM" )
+)
